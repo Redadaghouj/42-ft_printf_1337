@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: reda <reda@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mdaghouj <mdaghouj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 09:14:23 by mdaghouj          #+#    #+#             */
-/*   Updated: 2024/12/13 21:58:49 by reda             ###   ########.fr       */
+/*   Updated: 2024/12/14 17:08:44 by mdaghouj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,17 +42,23 @@ void	putnbr_base_rec(unsigned long nb, char *base, int *count);
 int		ft_printf(const char *format, ...);
 void	init_flags(t_flags *flags);
 void	ft_putnbr(int nb, char *base, t_flags flags, int *count);
-int		calc_decimal(int nb);
-void	handle_d(va_list ap, t_flags *flags, int *count);
-int		handle_len(int nb, t_flags flags);
+int		calc_decimal(long nb);
+void	handle_d(int nb, t_flags *flags, int *count);
+int		handle_len(long nb, t_flags *flags, int base);
 void	set_flag(int *flag, const char **format, int do_while);
 void	check_bonus_flags(t_flags *flags, int *count, int nb);
-void	all_bonus(t_flags *flags, int *count, long nb, int *sign);
+// void	all_bonus(t_flags *flags, int *count, long nb, int *sign);
 int		handle_string(char *str, t_flags *flags);
 int		handle_dash_s(t_flags *flags, char *str, int *count, int len);
 void	handle_width_s(t_flags *flags, int *count, int len);
 void	handle_precision_s(t_flags *flags, int *len);
 int		handle_char(int c, t_flags *flags);
 int		calc_hex(unsigned long nb);
+void	handle_width_d(t_flags *flags, int *count, int pad);
+void	handle_precision_d(long nb, t_flags *flags, int *count);
+void	handle_pad(t_flags flags, int *pad);
+void	handle_u(unsigned int nb, t_flags *flags, int *count);
+void	handle_p(unsigned long nb, t_flags *flags, int *count);
+void	handle_x(unsigned long nb, t_flags *flags, int *count, int type);
 
 #endif

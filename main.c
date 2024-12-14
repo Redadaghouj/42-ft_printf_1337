@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: reda <reda@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mdaghouj <mdaghouj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 16:51:57 by mdaghouj          #+#    #+#             */
-/*   Updated: 2024/12/13 21:49:16 by reda             ###   ########.fr       */
+/*   Updated: 2024/12/14 16:59:02 by mdaghouj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,31 +14,32 @@
 
 int	main(void)
 {
-	// DONE:
-	// TEST: %s
-	// // 0
-	// TEST: %p
 	// CHECK:
-	// int a = 123;
-
-
-	// int x = printf("|%20p|\n", &a); // |      0x7ffeef4f2780|
-	// int b = ft_printf("|%20p|\n", &a);
-	// x+=printf("|%-20p|\n", &a); // |0x7ffeecceb780      |
-	// b+=ft_printf("|%-20p|\n", &a);
-	// x+=printf("|%0p|\n", &a); // 0 is ignored
-	// b+=ft_printf("|%0p|\n", &a);
 
 	// FIXME:
-	// END TEST;
 
-	printf("|%05d|\n", 7);
-	printf("|%-05d|\n", 7);
-	printf("|%05.3d|\n", 7);
-	printf("|%03.5d|\n", 7);
-	printf("|%03.d|\n", 0);
+	// printf(" %.12p ", 0);
+	// puts("\n");
+	// ft_printf(" %.12p ", 0);
+	// int x = printf("%-1x", 0);
+	int x = printf("|%-4x|", 9);
+	printf("\nx = %d", x);
+	puts("\n");
+	x = 0;
+	// x += ft_printf("%-1x", 0);
+	x += ft_printf("|%-4x|", 9);
+	printf("\nx = %d", x);
+	// printf(" %-1x ", 10);
+	// printf(" %-3x ", 15);
+	// printf(" %-4x ", 16);
+	// printf(" %-5x ", 17);
+	// printf(" %-1x ", 99);
+	// printf(" %-1x ", -9);
+	// printf(" %-10x ", INT_MIN);
+	// printf(" %-11x ", LONG_MAX);
+	// printf(" %-12x ", LONG_MIN);
+	// printf(" %-13x ", UINT_MAX);
+	// printf(" %-14x ", ULONG_MAX);
+	// printf(" %-15x ", 9223372036854775807LL);
 	return (0);
 }
-
-// precision - len
-// width - precision

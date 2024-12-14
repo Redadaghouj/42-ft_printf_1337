@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: reda <reda@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mdaghouj <mdaghouj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 09:14:16 by mdaghouj          #+#    #+#             */
-/*   Updated: 2024/12/13 20:50:50 by reda             ###   ########.fr       */
+/*   Updated: 2024/12/14 15:45:29 by mdaghouj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,12 @@ size_t	ft_strlen(const char *s)
 
 void	putnbr_base_rec(unsigned long nb, char *base, int *count)
 {
-	if (nb / 16 != 0)
-		putnbr_base_rec((nb / 16), base, count);
-	*(count) += ft_putchar(base[nb % 16]);
+	int base_len;
+
+	base_len = ft_strlen(base);
+	if (nb / base_len != 0)
+		putnbr_base_rec((nb / base_len), base, count);
+	*(count) += ft_putchar(base[nb % base_len]);
 }
 
 void	putnbr_base(unsigned long nb, t_flags flags, int *count, int type)
@@ -68,19 +71,13 @@ void	init_flags(t_flags *flags)
 	flags->width = 0;
 }
 
-int	calc_decimal(int nb)
+int	calc_decimal(long nb)
 {
 	int	i;
 
 	i = 0;
 	if (nb == 0)
 		return (1);
-	else if (nb < 0)
-	{
-		nb = -nb;
-		i++;
-	}
-
 	while (nb != 0)
 	{
 		nb /= 10;
@@ -90,8 +87,6 @@ int	calc_decimal(int nb)
 }
 void	ft_putnbr(int nb, char *base, t_flags flags, int *count)
 {
-	if (nb < 0 )
-		(*count) += ft_putchar('-');
 	if (nb == -2147483648)
 	{
 		(*count) += ft_putstr("2147483648", 10);
@@ -103,6 +98,3 @@ void	ft_putnbr(int nb, char *base, t_flags flags, int *count)
 		ft_putnbr((nb / 10), base, flags, count);
 	(*count) += ft_putchar(base[nb % 10]);
 }
-
-
-

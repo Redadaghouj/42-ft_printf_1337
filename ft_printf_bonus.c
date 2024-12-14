@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: reda <reda@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mdaghouj <mdaghouj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 14:40:50 by mdaghouj          #+#    #+#             */
-/*   Updated: 2024/12/13 20:49:48 by reda             ###   ########.fr       */
+/*   Updated: 2024/12/14 13:10:07 by mdaghouj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+// #include "ft_printf.h"
 
-void	all_bonus(t_flags *flags, int *count, long nb, int *sign)
-{
+// void	all_bonus(t_flags *flags, int *count, long nb, int *sign)
+// {
 
-}
+// }
