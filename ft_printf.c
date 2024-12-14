@@ -6,7 +6,7 @@
 /*   By: mdaghouj <mdaghouj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 09:14:20 by mdaghouj          #+#    #+#             */
-/*   Updated: 2024/12/14 20:16:35 by mdaghouj         ###   ########.fr       */
+/*   Updated: 2024/12/14 20:25:48 by mdaghouj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,10 @@ void	check_flags(const char *format, int *count, va_list ap, t_flags *flags)
 		handle_p((unsigned long) ptr, flags, count);
 	}
 	else if (*format == '%')
+	{
+		
 		(*count) += ft_putchar('%');
+	}
 }
 
 void	handle_len(long nb, t_flags *flags, int *len)
