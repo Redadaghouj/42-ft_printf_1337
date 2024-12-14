@@ -6,7 +6,7 @@
 /*   By: mdaghouj <mdaghouj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 09:14:20 by mdaghouj          #+#    #+#             */
-/*   Updated: 2024/12/14 18:48:24 by mdaghouj         ###   ########.fr       */
+/*   Updated: 2024/12/14 20:16:35 by mdaghouj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,24 +150,24 @@ void	handle_x(unsigned int nb, t_flags *flags, int *count, int type)
 	int	pad;
 
 	len = calc_hex(nb);
+	if (flags->precision > len)
+		len = flags->precision;
 	if (flags->hash && nb)
 		len += 2;
-	handle_len(nb, flags, &len);
+	flags->width -= len;
 	handle_pad(*flags, &pad);	
 	check_bonus_flags(flags, count, nb);
 	if (!flags->dash && pad == ' ' && flags->width > 0)
 		handle_width_d(flags, count, pad);
-	if (nb < 0)
-		(*count) += ft_putchar('-');
-	if (!flags->dash && pad == '0' && flags->width > 0)
-		handle_width_d(flags, count, pad);
-	if (flags->hash && nb != 0 && (type == 'x' || type == 'X'))
+	if (flags->hash && nb != 0)
 	{
 		if (type == 'x')
 			*(count) += ft_putstr("0x", 2);
 		else
 			*(count) += ft_putstr("0X", 2);
 	}
+	if (!flags->dash && pad == '0' && flags->width > 0)
+		handle_width_d(flags, count, pad);
 	flags->precision -= calc_hex(nb);
 	handle_precision_d(flags, count);
 	if (len > 0)
