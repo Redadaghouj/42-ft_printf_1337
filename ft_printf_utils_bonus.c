@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_utils_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: reda <reda@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mdaghouj <mdaghouj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 13:25:59 by mdaghouj          #+#    #+#             */
-/*   Updated: 2024/12/13 20:50:20 by reda             ###   ########.fr       */
+/*   Updated: 2024/12/14 18:30:49 by mdaghouj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	calc_hex(unsigned long nb)
 
 	i = 0;
 	if (nb == 0)
-		return (3);
+		return (1);
 	while (nb != 0)
 	{
 		nb /= 16;

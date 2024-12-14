@@ -6,7 +6,7 @@
 /*   By: mdaghouj <mdaghouj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 09:14:20 by mdaghouj          #+#    #+#             */
-/*   Updated: 2024/12/14 17:09:14 by mdaghouj         ###   ########.fr       */
+/*   Updated: 2024/12/14 18:48:24 by mdaghouj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ void	check_flags(const char *format, int *count, va_list ap, t_flags *flags)
 	else if (*format == 'u')
 		handle_u(va_arg(ap, unsigned int), flags, count);
 	else if (*format == 'x')
-		handle_x(va_arg(ap, unsigned long), flags, count, 'x');
+		handle_x(va_arg(ap, unsigned int), flags, count, 'x');
 	else if (*format == 'X')
-		handle_x(va_arg(ap, unsigned long), flags, count, 'X');
+		handle_x(va_arg(ap, unsigned int), flags, count, 'X');
 	else if (*format == 'p')
 	{
 		ptr = va_arg(ap, void *);
@@ -37,24 +37,15 @@ void	check_flags(const char *format, int *count, va_list ap, t_flags *flags)
 		(*count) += ft_putchar('%');
 }
 
-int	handle_len(long nb, t_flags *flags, int base)
+void	handle_len(long nb, t_flags *flags, int *len)
 {
-	int len;
-
-	if (base == 10)
-		len = calc_decimal(nb);
-	else
-		len = calc_hex(nb);
-	if (nb != 0 && base == 16)
-		len += 2;
-	if (flags->precision > len)
-		len = flags->precision;
+	if (flags->precision > *len)
+		*len = flags->precision;
 	if (nb < 0 || flags->space || flags->plus)
-		len++;
+		(*len)++;
 	if (flags->precision == 0 && nb == 0)
-		len = 0;
-	flags->width -= len;
-	return (len);
+		*len = 0;
+	flags->width -= *len;
 }
 
 void	handle_width_d(t_flags *flags, int *count, int pad)
@@ -66,9 +57,8 @@ void	handle_width_d(t_flags *flags, int *count, int pad)
 	}
 }
 
-void	handle_precision_d(long nb, t_flags *flags, int *count)
+void	handle_precision_d(t_flags *flags, int *count)
 {
-	flags->precision -= calc_decimal(nb);
 	while (flags->precision > 0)
 	{
 		(*count) += ft_putchar('0');
@@ -90,7 +80,8 @@ void	handle_d(int nb, t_flags *flags, int *count)
 	int	len;
 	int	pad;
 
-	len = handle_len(nb, flags, 10);
+	len = calc_decimal(nb);
+	handle_len(nb, flags, &len);
 	handle_pad(*flags, &pad);	
 	if (!flags->dash && pad == ' ' && flags->width > 0)
 		handle_width_d(flags, count, pad);
@@ -99,7 +90,8 @@ void	handle_d(int nb, t_flags *flags, int *count)
 	check_bonus_flags(flags, count, nb);
 	if (!flags->dash && pad == '0' && flags->width > 0)
 		handle_width_d(flags, count, pad);
-	handle_precision_d(nb, flags, count);
+	flags->precision -= calc_decimal(nb);
+	handle_precision_d(flags, count);
 	if (len > 0)
 		ft_putnbr(nb, DECIMAL, *flags, count);
 	if (flags->dash)
@@ -111,7 +103,8 @@ void	handle_u(unsigned int nb, t_flags *flags, int *count)
 	int	len;
 	int	pad;
 
-	len = handle_len(nb, flags, 10);
+	len = calc_decimal(nb);
+	handle_len(nb, flags, &len);
 	handle_pad(*flags, &pad);	
 	check_bonus_flags(flags, count, nb);
 	if (!flags->dash && pad == ' ' && flags->width > 0)
@@ -120,7 +113,8 @@ void	handle_u(unsigned int nb, t_flags *flags, int *count)
 		(*count) += ft_putchar('-');
 	if (!flags->dash && pad == '0' && flags->width > 0)
 		handle_width_d(flags, count, pad);
-	handle_precision_d(nb, flags, count);
+	flags->precision -= calc_decimal(nb);
+	handle_precision_d(flags, count);
 	if (len > 0)
 		putnbr_base_rec(nb, DECIMAL, count);
 	if (flags->dash)
@@ -131,8 +125,9 @@ void	handle_p(unsigned long nb, t_flags *flags, int *count)
 {
 	int	len;
 	int	pad;
-
-	len = handle_len(nb, flags, 16);
+	len = calc_hex(nb);
+	len += 2;
+	handle_len(nb, flags, &len);
 	handle_pad(*flags, &pad);	
 	check_bonus_flags(flags, count, nb);
 	if (!flags->dash && pad == ' ' && flags->width > 0)
@@ -141,19 +136,23 @@ void	handle_p(unsigned long nb, t_flags *flags, int *count)
 		(*count) += ft_putchar('-');
 	if (!flags->dash && pad == '0' && flags->width > 0)
 		handle_width_d(flags, count, pad);
-	handle_precision_d(nb, flags, count);
+	flags->precision -= calc_hex(nb);
+	handle_precision_d(flags, count);
 	if (len > 0)
 		putnbr_base(nb, *flags, count, 'p');
 	if (flags->dash)
 		handle_width_d(flags, count, pad);
 }
 
-void	handle_x(unsigned long nb, t_flags *flags, int *count, int type)
+void	handle_x(unsigned int nb, t_flags *flags, int *count, int type)
 {
 	int	len;
 	int	pad;
 
-	len = handle_len(nb, flags, 16);
+	len = calc_hex(nb);
+	if (flags->hash && nb)
+		len += 2;
+	handle_len(nb, flags, &len);
 	handle_pad(*flags, &pad);	
 	check_bonus_flags(flags, count, nb);
 	if (!flags->dash && pad == ' ' && flags->width > 0)
@@ -162,7 +161,15 @@ void	handle_x(unsigned long nb, t_flags *flags, int *count, int type)
 		(*count) += ft_putchar('-');
 	if (!flags->dash && pad == '0' && flags->width > 0)
 		handle_width_d(flags, count, pad);
-	handle_precision_d(nb, flags, count);
+	if (flags->hash && nb != 0 && (type == 'x' || type == 'X'))
+	{
+		if (type == 'x')
+			*(count) += ft_putstr("0x", 2);
+		else
+			*(count) += ft_putstr("0X", 2);
+	}
+	flags->precision -= calc_hex(nb);
+	handle_precision_d(flags, count);
 	if (len > 0)
 		putnbr_base(nb, *flags, count, type);
 	if (flags->dash)

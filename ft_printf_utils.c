@@ -6,7 +6,7 @@
 /*   By: mdaghouj <mdaghouj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 09:14:16 by mdaghouj          #+#    #+#             */
-/*   Updated: 2024/12/14 15:45:29 by mdaghouj         ###   ########.fr       */
+/*   Updated: 2024/12/14 18:42:13 by mdaghouj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,13 +49,6 @@ void	putnbr_base(unsigned long nb, t_flags flags, int *count, int type)
 		}
 		if (flags.precision < 0)
 			*(count) += ft_putstr("0x", 2);
-	}
-	if (flags.hash && nb != 0 && (type == 'x' || type == 'X'))
-	{
-		if (type == 'x')
-			*(count) += ft_putstr("0x", 2);
-		else
-			*(count) += ft_putstr("0X", 2);
 	}
 	putnbr_base_rec(nb, base, count);
 }
