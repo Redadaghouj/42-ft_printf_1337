@@ -6,7 +6,7 @@
 /*   By: mdaghouj <mdaghouj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 09:14:23 by mdaghouj          #+#    #+#             */
-/*   Updated: 2024/12/15 13:29:42 by mdaghouj         ###   ########.fr       */
+/*   Updated: 2024/12/15 14:44:16 by mdaghouj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	putnbr_base(unsigned long nb, t_flags flags, int *count, int type);
 void	putnbr_base_rec(unsigned long nb, char *base, int *count);
 int		ft_printf(const char *format, ...);
 void	init_flags(t_flags *flags);
-void	ft_putnbr(int nb, char *base, t_flags flags, int *count);
+void	ft_putnbr(int nb, int *count);
 int		calc_decimal(long nb);
 void	handle_d(int nb, t_flags *flags, int *count);
 void	handle_len(long nb, t_flags *flags, int *len);
@@ -50,8 +50,8 @@ void	handle_width_s(t_flags *flags, int *count, int len);
 void	handle_precision_s(t_flags *flags, int *len);
 int		handle_char(int c, t_flags *flags);
 int		calc_hex(unsigned long nb);
-void	handle_width_d(t_flags *flags, int *count, int pad);
-void	handle_precision_d(t_flags *flags, int *count);
+void	print_width(t_flags *flags, int *count, int pad);
+void	print_precision(t_flags *flags, int *count);
 void	handle_pad(t_flags flags, int *pad);
 void	handle_u(unsigned int nb, t_flags *flags, int *count);
 void	handle_p(unsigned long nb, t_flags *flags, int *count);

@@ -6,7 +6,7 @@
 /*   By: mdaghouj <mdaghouj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 09:14:16 by mdaghouj          #+#    #+#             */
-/*   Updated: 2024/12/15 13:28:05 by mdaghouj         ###   ########.fr       */
+/*   Updated: 2024/12/15 14:40:28 by mdaghouj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int	calc_decimal(long nb)
 	return (i);
 }
 
-void	ft_putnbr(int nb, char *base, t_flags flags, int *count)
+void	ft_putnbr(int nb, int *count)
 {
 	if (nb == -2147483648)
 	{
@@ -78,6 +78,6 @@ void	ft_putnbr(int nb, char *base, t_flags flags, int *count)
 	if (nb < 0)
 		nb = -nb;
 	if (nb / 10 != 0)
-		ft_putnbr((nb / 10), base, flags, count);
-	(*count) += ft_putchar(base[nb % 10]);
+		ft_putnbr((nb / 10), count);
+	(*count) += ft_putchar((nb % 10) + '0');
 }

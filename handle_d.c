@@ -6,7 +6,7 @@
 /*   By: mdaghouj <mdaghouj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 10:51:42 by mdaghouj          #+#    #+#             */
-/*   Updated: 2024/12/15 12:23:31 by mdaghouj         ###   ########.fr       */
+/*   Updated: 2024/12/15 14:45:28 by mdaghouj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	handle_len(long nb, t_flags *flags, int *len)
 	flags->width -= *len;
 }
 
-void	handle_width_d(t_flags *flags, int *count, int pad)
+void	print_width(t_flags *flags, int *count, int pad)
 {
 	while (flags->width > 0)
 	{
@@ -32,7 +32,7 @@ void	handle_width_d(t_flags *flags, int *count, int pad)
 	}
 }
 
-void	handle_precision_d(t_flags *flags, int *count)
+void	print_precision(t_flags *flags, int *count)
 {
 	while (flags->precision > 0)
 	{
@@ -52,16 +52,16 @@ void	handle_d(int nb, t_flags *flags, int *count)
 	if (flags->precision == 0 && nb == 0 && (flags->space || flags->plus))
 		flags->width--;
 	if (!flags->dash && pad == ' ' && flags->width > 0)
-		handle_width_d(flags, count, pad);
+		print_width(flags, count, pad);
 	if (nb < 0)
 		(*count) += ft_putchar('-');
 	check_bonus_flags(flags, count, nb);
 	if (!flags->dash && pad == '0' && flags->width > 0)
-		handle_width_d(flags, count, pad);
+		print_width(flags, count, pad);
 	flags->precision -= calc_decimal(nb);
-	handle_precision_d(flags, count);
+	print_precision(flags, count);
 	if (len > 0)
-		ft_putnbr(nb, DECIMAL, *flags, count);
+		ft_putnbr(nb, count);
 	if (flags->dash)
-		handle_width_d(flags, count, pad);
+		print_width(flags, count, pad);
 }
