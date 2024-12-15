@@ -6,7 +6,7 @@
 /*   By: mdaghouj <mdaghouj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 09:14:23 by mdaghouj          #+#    #+#             */
-/*   Updated: 2024/12/14 18:31:10 by mdaghouj         ###   ########.fr       */
+/*   Updated: 2024/12/15 11:13:02 by mdaghouj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ void	handle_d(int nb, t_flags *flags, int *count);
 void	handle_len(long nb, t_flags *flags, int *len);
 void	set_flag(int *flag, const char **format, int do_while);
 void	check_bonus_flags(t_flags *flags, int *count, int nb);
-// void	all_bonus(t_flags *flags, int *count, long nb, int *sign);
 int		handle_string(char *str, t_flags *flags);
 int		handle_dash_s(t_flags *flags, char *str, int *count, int len);
 void	handle_width_s(t_flags *flags, int *count, int len);
@@ -60,5 +59,8 @@ void	handle_pad(t_flags flags, int *pad);
 void	handle_u(unsigned int nb, t_flags *flags, int *count);
 void	handle_p(unsigned long nb, t_flags *flags, int *count);
 void	handle_x(unsigned int nb, t_flags *flags, int *count, int type);
+void	handle_percentage(t_flags *flags, int *count);
+void	handle_len_x(int *len, t_flags *flags, unsigned long nb);
+void	handle_len_p(int *len, t_flags *flags, unsigned long nb);
 
 #endif

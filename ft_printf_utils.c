@@ -6,7 +6,7 @@
 /*   By: mdaghouj <mdaghouj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 09:14:16 by mdaghouj          #+#    #+#             */
-/*   Updated: 2024/12/14 18:42:13 by mdaghouj         ###   ########.fr       */
+/*   Updated: 2024/12/15 11:02:52 by mdaghouj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ size_t	ft_strlen(const char *s)
 
 void	putnbr_base_rec(unsigned long nb, char *base, int *count)
 {
-	int base_len;
+	int	base_len;
 
 	base_len = ft_strlen(base);
 	if (nb / base_len != 0)
@@ -53,17 +53,6 @@ void	putnbr_base(unsigned long nb, t_flags flags, int *count, int type)
 	putnbr_base_rec(nb, base, count);
 }
 
-void	init_flags(t_flags *flags)
-{
-	flags->hash = 0;
-	flags->plus = 0;
-	flags->space = 0;
-	flags->precision = -1;
-	flags->zero = 0;
-	flags->dash = 0;
-	flags->width = 0;
-}
-
 int	calc_decimal(long nb)
 {
 	int	i;
@@ -78,6 +67,7 @@ int	calc_decimal(long nb)
 	}
 	return (i);
 }
+
 void	ft_putnbr(int nb, char *base, t_flags flags, int *count)
 {
 	if (nb == -2147483648)

@@ -6,7 +6,7 @@
 /*   By: mdaghouj <mdaghouj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 13:25:59 by mdaghouj          #+#    #+#             */
-/*   Updated: 2024/12/14 18:30:49 by mdaghouj         ###   ########.fr       */
+/*   Updated: 2024/12/15 10:53:27 by mdaghouj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,24 @@ int	calc_hex(unsigned long nb)
 		i++;
 	}
 	return (i);
+}
+
+void	init_flags(t_flags *flags)
+{
+	flags->hash = 0;
+	flags->plus = 0;
+	flags->space = 0;
+	flags->precision = -1;
+	flags->zero = 0;
+	flags->dash = 0;
+	flags->width = 0;
+}
+
+void	handle_pad(t_flags flags, int *pad)
+{
+	*pad = ' ';
+	if (flags.precision > -1)
+		*pad = ' ';
+	else if (flags.zero && !flags.dash)
+		*pad = '0';
 }

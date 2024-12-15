@@ -7,7 +7,7 @@ AR := ar rcs
 
 RM := rm -f
 
-SRCS := ft_printf.c ft_printf_utils.c handle_strings.c handle_strings_bonus.c ft_printf_utils_bonus.c ft_printf_bonus.c
+SRCS := ft_printf.c ft_printf_utils.c handle_s.c handle_s_bonus.c ft_printf_utils_bonus.c handle_p.c handle_d.c handle_u.c handle_x.c
 
 OBJ := ${SRCS:.c=.o}
 
