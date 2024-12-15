@@ -6,7 +6,7 @@
 /*   By: mdaghouj <mdaghouj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 10:51:42 by mdaghouj          #+#    #+#             */
-/*   Updated: 2024/12/15 11:03:23 by mdaghouj         ###   ########.fr       */
+/*   Updated: 2024/12/15 12:23:31 by mdaghouj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ void	handle_d(int nb, t_flags *flags, int *count)
 	len = calc_decimal(nb);
 	handle_len(nb, flags, &len);
 	handle_pad(*flags, &pad);
+	if (flags->precision == 0 && nb == 0 && (flags->space || flags->plus))
+		flags->width--;
 	if (!flags->dash && pad == ' ' && flags->width > 0)
 		handle_width_d(flags, count, pad);
 	if (nb < 0)
