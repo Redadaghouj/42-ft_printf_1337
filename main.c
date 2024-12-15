@@ -6,7 +6,7 @@
 /*   By: mdaghouj <mdaghouj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 16:51:57 by mdaghouj          #+#    #+#             */
-/*   Updated: 2024/12/14 20:23:32 by mdaghouj         ###   ########.fr       */
+/*   Updated: 2024/12/15 10:17:09 by mdaghouj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,7 @@ int	main(void)
 	// CHECK:
 
 	// FIXME:
-	printf("%05%");
-	puts("\n");
-	ft_printf("%05%");
-	puts("\n");
-
+	printf("|%-108p|\n", (void*)11646713326646154808lu);
+	ft_printf("|%-108p|\n", (void*)11646713326646154808lu);
 	return (0);
 }

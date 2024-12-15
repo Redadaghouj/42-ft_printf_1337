@@ -6,7 +6,7 @@
 /*   By: mdaghouj <mdaghouj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 09:14:20 by mdaghouj          #+#    #+#             */
-/*   Updated: 2024/12/14 20:25:48 by mdaghouj         ###   ########.fr       */
+/*   Updated: 2024/12/15 10:26:13 by mdaghouj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,27 @@ void	check_flags(const char *format, int *count, va_list ap, t_flags *flags)
 	}
 	else if (*format == '%')
 	{
-		
+		int	pad;
+
+		flags->width--;
+		handle_pad(*flags, &pad);
+		if (!flags->dash)
+		{
+			while (flags->width > 0)
+			{
+				(*count) += ft_putchar(pad);
+				flags->width--;
+			}
+		}
 		(*count) += ft_putchar('%');
+		if (flags->dash)
+		{
+			while (flags->width > 0)
+			{
+				(*count) += ft_putchar(pad);
+				flags->width--;
+			}
+		}
 	}
 }
 
@@ -128,9 +147,13 @@ void	handle_p(unsigned long nb, t_flags *flags, int *count)
 {
 	int	len;
 	int	pad;
-	len = calc_hex(nb);
-	len += 2;
-	handle_len(nb, flags, &len);
+
+	len = calc_hex(nb) + 2;
+	if (flags->precision > len)
+		len = flags->precision;
+	if (flags->precision == 0 && nb == 0)
+		len = 0;
+	flags->width -= len;
 	handle_pad(*flags, &pad);	
 	check_bonus_flags(flags, count, nb);
 	if (!flags->dash && pad == ' ' && flags->width > 0)
@@ -157,6 +180,8 @@ void	handle_x(unsigned int nb, t_flags *flags, int *count, int type)
 		len = flags->precision;
 	if (flags->hash && nb)
 		len += 2;
+	if (flags->precision == 0 && nb == 0)
+		len = 0;
 	flags->width -= len;
 	handle_pad(*flags, &pad);	
 	check_bonus_flags(flags, count, nb);
