@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_strings.c                                   :+:      :+:    :+:   */
+/*   handle_s.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdaghouj <mdaghouj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 09:14:26 by mdaghouj          #+#    #+#             */
-/*   Updated: 2024/12/05 13:18:43 by mdaghouj         ###   ########.fr       */
+/*   Updated: 2024/12/15 13:28:34 by mdaghouj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,12 @@
 
 int	ft_putchar(int c)
 {
-	int	read_bytes;
-
-	read_bytes = write(1, &c, 1);
-	return (read_bytes);
+	return (write(1, &c, 1));
 }
 
 int	ft_putstr(char *str, int len)
 {
-	write(1, str, len);
-	return (len);
+	return (write(1, str, len));
 }
 
 int	handle_string(char *str, t_flags *flags)

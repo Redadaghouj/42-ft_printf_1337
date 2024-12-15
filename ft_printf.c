@@ -6,7 +6,7 @@
 /*   By: mdaghouj <mdaghouj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 09:14:20 by mdaghouj          #+#    #+#             */
-/*   Updated: 2024/12/15 10:59:03 by mdaghouj         ###   ########.fr       */
+/*   Updated: 2024/12/15 13:18:13 by mdaghouj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ int	all(const char *format, va_list ap)
 
 	init_flags(&flags);
 	count = 0;
+	if (write(0, "", 0) == -1)
+		return (-1);
 	while (*format != '\0')
 	{
 		if (*format == '%')
@@ -105,20 +107,8 @@ void	handle_percentage(t_flags *flags, int *count)
 	flags->width--;
 	handle_pad(*flags, &pad);
 	if (!flags->dash)
-	{
-		while (flags->width > 0)
-		{
-			(*count) += ft_putchar(pad);
-			flags->width--;
-		}
-	}
+		handle_width_d(flags, count, pad);
 	(*count) += ft_putchar('%');
 	if (flags->dash)
-	{
-		while (flags->width > 0)
-		{
-			(*count) += ft_putchar(pad);
-			flags->width--;
-		}
-	}
+		handle_width_d(flags, count, pad);
 }

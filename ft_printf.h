@@ -6,7 +6,7 @@
 /*   By: mdaghouj <mdaghouj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 09:14:23 by mdaghouj          #+#    #+#             */
-/*   Updated: 2024/12/15 11:13:02 by mdaghouj         ###   ########.fr       */
+/*   Updated: 2024/12/15 13:29:42 by mdaghouj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 
 # include <unistd.h>
 # include <stdarg.h>
-# include <stdio.h> // TODO: remove it
-# include <limits.h> // TODO: remove it
 
 # define DECIMAL "0123456789"
 # define HEX_LW "0123456789abcdef"
@@ -31,7 +29,6 @@ typedef struct s_flags
 	int	zero;
 	int	dash;
 	int	width;
-	int	pad;
 }	t_flags;
 
 size_t	ft_strlen(const char *s);
