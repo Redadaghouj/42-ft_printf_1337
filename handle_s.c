@@ -6,7 +6,7 @@
 /*   By: mdaghouj <mdaghouj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 09:14:26 by mdaghouj          #+#    #+#             */
-/*   Updated: 2024/12/15 14:46:29 by mdaghouj         ###   ########.fr       */
+/*   Updated: 2024/12/15 19:43:23 by mdaghouj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,14 @@
 
 int	ft_putchar(int c)
 {
-	return (write(1, &c, 1));
+	write(1, &c, 1);
+	return (1);
 }
 
 int	ft_putstr(char *str, int len)
 {
-	return (write(1, str, len));
+	write(1, str, len);
+	return (len);
 }
 
 int	handle_string(char *str, t_flags *flags)

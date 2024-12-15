@@ -6,7 +6,7 @@
 /*   By: mdaghouj <mdaghouj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 09:14:20 by mdaghouj          #+#    #+#             */
-/*   Updated: 2024/12/15 15:58:25 by mdaghouj         ###   ########.fr       */
+/*   Updated: 2024/12/15 19:44:43 by mdaghouj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ void	check_flags(const char *format, int *count, va_list ap, t_flags *flags)
 	}
 	else if (*format == '%')
 		handle_percentage(flags, count);
+	else
+		(*count) += ft_putchar(*format);
 }
 
 void	check_and_skip(const char **format, t_flags *flags)
